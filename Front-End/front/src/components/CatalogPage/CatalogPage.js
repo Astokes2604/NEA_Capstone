@@ -1,15 +1,15 @@
 import React from 'react';
-import catalog from '../catalogData';
-import CatalogItem from './CatalogItem';
+import catalogData from '../../catalogData';
+import CatalogItem from '../CatalogItem/CatalogItem';
 
 const CatalogPage = () => {
     return (
-        <div>
-            {catalog.map(item => (
+        <div className="catalog-page">
+            {catalogData.map(item => (
                 <CatalogItem key={item.id} item={item} />
             ))}
         </div>
     );
 };
 
-export default CatalogPage
+export default CatalogPage;
