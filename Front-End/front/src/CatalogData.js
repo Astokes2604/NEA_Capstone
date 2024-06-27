@@ -1,4 +1,4 @@
-const catalogData = [
+const catalog = [
     {
         id: 1,
         name: "Oversized Butterfly T-Shirt",
@@ -13,4 +13,4 @@ const catalogData = [
     }
 ];
 
-export default catalogData;
+export default catalog;
