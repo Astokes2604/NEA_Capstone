@@ -5,15 +5,23 @@ import './AboutUs.css'
 const AboutUs = () => {
     return (
         <div className="about-us">
-            <h1>About New Era Athletic</h1>
-            <p>
-                
-            </p>
+            <h1>About New Era Athletics</h1>
             <h2>Our Mission</h2>
+            <p>
+                Here at New Era Athletics we strive to achive a 
+                comfort stylish fit for on the street and in the gym. 
+
+            </p>
+            <h2>Our Story</h2>
+            <h4>
+                Alexander Stokes
+            </h4>
             <p>
 
             </p>
-            <h2>Out Story</h2>
+            <h4>
+                Cole Tasso
+            </h4>
             <p>
 
             </p>

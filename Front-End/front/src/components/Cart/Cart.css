@@ -1,0 +1,13 @@
+.cart-page {
+    padding: 20px;
+    text-align: left;
+}
+
+.cart-page h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.cart-page p {
+    font-size: 1.2em;
+}
