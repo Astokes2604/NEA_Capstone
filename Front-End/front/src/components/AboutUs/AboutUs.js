@@ -8,23 +8,33 @@ const AboutUs = () => {
             <h1>About New Era Athletics</h1>
             <h2>Our Mission</h2>
             <p>
-                Here at New Era Athletics we strive to achive a 
-                comfort stylish fit for on the street and in the gym. 
+                Here at New Era Athletics we strive to achive a
+                comfort stylish fit for on the street and in the gym.
 
             </p>
             <h2>Our Story</h2>
-            <h4>
-                Alexander Stokes
-            </h4>
-            <p>
+            <div className="ceo">
+                <img src="../../images/AlexanderStokes.jpg" alt="Alexander Stokes" className="ceo-image" />
+                <div>
+                    <h4>
+                        Alexander Stokes
+                    </h4>
+                    <p>
 
-            </p>
-            <h4>
-                Cole Tasso
-            </h4>
-            <p>
+                    </p>
+                </div>
+            </div>
+            <div className="ceo">
+                <img src="../../images/ColeTasso.jpg" alt="Cole Tasso" className="ceo-image" />
+                <div>
+                    <h4>
+                        Cole Tasso
+                    </h4>
+                    <p>
 
-            </p>
+                    </p>
+                </div>
+            </div>
             <h2><Link to="/contact">Contact Us</Link></h2>
         </div>
     )
