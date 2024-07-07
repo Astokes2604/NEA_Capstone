@@ -20,7 +20,7 @@ const AboutUs = () => {
                         Alexander Stokes
                     </h4>
                     <p>
-
+                        
                     </p>
                 </div>
             </div>

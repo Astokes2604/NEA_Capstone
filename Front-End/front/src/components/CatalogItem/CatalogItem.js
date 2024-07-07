@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './CatalogItem.css';
 
-const CatalogItem = ({ item }) => {
+const CatalogItem = ({ name, price, image, colors, sizes }) => {
     return (
         <div className="catalog-item">
-            <Link to={`/item/${item.id}`}>
-                <img src={item.image} alt={item.name} />
-                <h2>{item.name}</h2>
-                <p>${item.price}</p>
-            </Link>
+            <img src={image || 'default-image-path.jpg'} alt={name || 'Item'} className="catalog-item-image" />
+            <div className="catalog-item-info">
+                <h2>{name || 'No Name Available'}</h2>
+                <p>{price ? `$${price.toFixed(2)}` : 'Price not available'}</p>
+            </div>
         </div>
     );
 };
