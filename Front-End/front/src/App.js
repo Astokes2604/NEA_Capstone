@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { CartProvider } from './contexts/CartContext';
 import Home from './components/Home/Home';
 import CatalogPage from './components/CatalogPage/CatalogPage';
 import ItemDetails from './components/ItemDetails/ItemDetails';
@@ -12,15 +13,19 @@ import './App.css';
 function App() {
     return (
         <Router>
-            <Header />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/catalog" element={<CatalogPage />} />
-                <Route path="/item/:id" element={<ItemDetails />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/contact" element={<ContactUs />} />
-                <Route path="/about" element={<AboutUs />} />
-            </Routes>
+            <CartProvider>
+                <Header />
+                <div>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/catalog" element={<CatalogPage />} />
+                        <Route path="/item/:id" element={<ItemDetails />} />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/contact" element={<ContactUs />} />
+                        <Route path="/about" element={<AboutUs />} />
+                    </Routes>
+                </div>
+            </CartProvider>
         </Router>
     );
 }

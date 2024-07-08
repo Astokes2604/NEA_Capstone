@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useCart } from '../../contexts/CartContext';
 import './ItemDetails.css';
 
 const ItemDetails = () => {
@@ -8,6 +9,7 @@ const ItemDetails = () => {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const { addToCart } = useCart();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -16,12 +18,8 @@ const ItemDetails = () => {
                 const response = await fetch(`http://localhost:5000/catalog/${id}`);
                 const data = await response.json();
                 setItem(data);
-                if (data.colors && data.colors.length > 0) {
-                    setSelectedColor(data.colors[0]);
-                }
-                if (data.sizes && data.sizes.length > 0) {
-                    setSelectedSize(data.sizes[0]);
-                }
+                setSelectedColor(data.colors[0]);
+                setSelectedSize(data.sizes[0]);
             } catch (error) {
                 console.error('Error fetching item details:', error);
             }
@@ -31,8 +29,7 @@ const ItemDetails = () => {
     }, [id]);
 
     const handleAddToCart = () => {
-        // Add to cart logic
-        console.log('Add to cart:', { item, selectedColor, selectedSize, quantity });
+        addToCart({ ...item, selectedColor, selectedSize, quantity });
         navigate('/cart');
     };
 
@@ -40,14 +37,14 @@ const ItemDetails = () => {
 
     return (
         <div className="item-details">
-            <img src={item.image || 'default-image-path.jpg'} alt={item.name} className="item-image" />
+            <img src={item.image} alt={item.name} className="item-image" />
             <div className="item-info">
-                <h1>{item.name || 'No Name Available'}</h1>
-                <p className="item-price">{item.price ? `$${item.price.toFixed(2)}` : 'Price not available'}</p>
+                <h1>{item.name}</h1>
+                <p className="item-price">${item.price.toFixed(2)}</p>
                 <div className="item-options">
                     <div className="item-colors">
                         <label>Color:</label>
-                        {item.colors && item.colors.length > 0 ? item.colors.map((color) => (
+                        {item.colors.map((color) => (
                             <button
                                 key={color}
                                 className={`color-button ${color === selectedColor ? 'selected' : ''}`}
@@ -55,11 +52,11 @@ const ItemDetails = () => {
                             >
                                 {color}
                             </button>
-                        )) : <p>No colors available</p>}
+                        ))}
                     </div>
                     <div className="item-sizes">
                         <label>Size:</label>
-                        {item.sizes && item.sizes.length > 0 ? item.sizes.map((size) => (
+                        {item.sizes.map((size) => (
                             <button
                                 key={size}
                                 className={`size-button ${size === selectedSize ? 'selected' : ''}`}
@@ -67,7 +64,7 @@ const ItemDetails = () => {
                             >
                                 {size}
                             </button>
-                        )) : <p>No sizes available</p>}
+                        ))}
                     </div>
                     <div className="item-quantity">
                         <label>Quantity:</label>

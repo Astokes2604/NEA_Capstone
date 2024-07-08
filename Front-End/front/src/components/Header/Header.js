@@ -17,7 +17,7 @@ const Header = () => {
                 <Link to="/contact">Contact</Link>
             </nav>
             <div className="cart">
-                <Link to="/cart">Cart</Link>
+                <Link to="/cart">🛒</Link>
             </div>
         </header>
     );
