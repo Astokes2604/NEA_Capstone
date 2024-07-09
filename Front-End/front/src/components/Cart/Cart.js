@@ -1,13 +1,15 @@
 import React from 'react'
 import { useCart } from '../../contexts/CartContext';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import './Cart.css'
 
 const Cart = () => {
-    const { cart, clearCart } = useCart();
+    const { cart, clearCart, calculateTotal } = useCart();
 
-    const calculateTotal = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-    };
+    const handleApprove = (orderID) => {
+        console.log('Order approved:', orderID);
+        clearCart();
+    }
 
     return (
         <div className="cart">
@@ -33,6 +35,26 @@ const Cart = () => {
                     <div className="cart-total">
                         <h2>Total: ${calculateTotal()}</h2>
                     </div>
+                    <PayPalScriptProvider options={{ "client-id": "AcVpSd7CIQj2IFsLRPEXmWHx1Q6OsM9YVrQv9qmAMVRGj7eGsFuA10t1DHmKvi-TyMNbzjiNDNNfvEkY" }}>
+                        <PayPalButtons
+                            createOrder={(data, actions) => {
+                                return actions.order.create({
+                                    purchase_units: [
+                                        {
+                                            amount: {
+                                                value: calculateTotal(),
+                                            },
+                                        },
+                                    ],
+                                });
+                            }}
+                            onApprove={(data, actions) => {
+                                return actions.order.capture().then((details) => {
+                                    handleApprove(data.orderID);
+                                });
+                            }}
+                        />
+                    </PayPalScriptProvider>
                     <button onClick={clearCart} className="clear-cart-button">Clear Cart</button>
                 </>
             )}

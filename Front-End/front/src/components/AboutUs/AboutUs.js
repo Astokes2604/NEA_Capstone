@@ -20,7 +20,13 @@ const AboutUs = () => {
                         Alexander Stokes
                     </h4>
                     <p>
-                        
+                    I’m Alexander Stokes, and I've been training since I was 17. Growing up with parents who were 
+                    fitness enthusiasts, I decided to give it a try, and soon discovered my own passion for the fitness 
+                    world. Inspired by the fantastic clothing brands in the fitness industry, I wanted to create 
+                    something that would inspire others. My goal is to help people find their own love for fitness and 
+                    lead healthier, happier lives. Through my journey, I've learned that fitness is not just about the 
+                    physical aspect, but also about mental strength and perseverance. I hope my story and my work can motivate 
+                    others to start their own fitness journey and find their passion.
                     </p>
                 </div>
             </div>
@@ -31,7 +37,11 @@ const AboutUs = () => {
                         Cole Tasso
                     </h4>
                     <p>
-
+                    I'm Cole Tasso, and I've been training since I was 14. My passion is fitness and 
+                    nutrition. Growing up, I watched athletes on YouTube wearing gym brands that I really 
+                    liked. Getting those pieces that those athletes had made me feel one step closer to 
+                    achieving my goals. Inspired by this, we strive to make New Era Athletics an inspirational 
+                    brand that empowers new athletes. Our mission is to help them feel strong and confident in the gym.
                     </p>
                 </div>
             </div>
