@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 
-.color-button.selected, .size-button.color-button.selected {
+.color-button.selected, .size-button.selected {
     background-color: #ddd;
 }
 
