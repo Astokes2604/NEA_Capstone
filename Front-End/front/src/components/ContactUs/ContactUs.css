@@ -39,3 +39,20 @@
 .contact-us button:hover {
     background-color: #0056b3;
 }
+
+.social-media {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.social-media a {
+    color: #000;
+    margin: 0 10px;
+    font-size: 2rem;
+}
+
+.social-media a:hover {
+    color: #007bff;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ContactUs.css';
+import { FaInstagram, FaTiktok } from 'react-icons/fa';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -65,6 +66,10 @@ const ContactUs = () => {
                 </div>
                 <button type="submit">Submit</button>
             </form>
+            <div className="social-media">
+                <a href="https://www.instagram.com/newera_athletics/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                <a href="https://www.tiktok.com/@neweraathletics/" target="_blank" rel="noopener noreferrer"><FaTiktok /></a>
+            </div>
         </div>
     );
 };
