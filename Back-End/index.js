@@ -6,6 +6,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 const catalogRouter = require('./routes/catalog');
 
 dotenv.config();
@@ -16,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// Nodemailer configuration
+// nodemailer configuration
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -54,7 +55,7 @@ mongoose.connect(process.env.MONGO_URI)
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true, unique: true }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -91,35 +92,81 @@ app.post('/login', async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(200).send({ token });
-        // console.log(user.username);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error logging in user');
     }
 });
 
-// Middleware to extract user info from token
-const authenticate = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+// Post Model
+const postSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    username: { type: String, required: true },
+    description: { type: String, required: true },
+    image: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+});
 
-    if (!token) {
-        return res.status(401).send('Access denied');
+const Post = mongoose.model('Post', postSchema);
+
+// Multer configuration for image uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
     }
+});
 
+const upload = multer({ storage });
+
+// Create Post route
+app.post('/createpost', upload.single('image'), async (req, res) => {
+    const { description } = req.body;
+    const token = req.headers.authorization.split(' ')[1];
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userId = decoded.userId;
-        next();
-    } catch (error) {
-        res.status(400).send('Invalid token');
-    }
-};
+        const user = await User.findById(decoded.userId);
 
-// apply middleware to post creation route
-app.use('/posts', authenticate, require('./routes/post'));
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const newPost = new Post({
+            userId: user._id,
+            username: user.username,
+            description,
+            image: req.file.path
+        });
+
+        await newPost.save();
+
+        // Send email notification
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: 'NEAcustomerservice23@gmail.com',
+            subject: `New Post Created by ${user.username}`,
+            text: `Description: ${description}\nImage: ${req.file.path}\nUser: ${user.username}\nUser ID: ${user._id}`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
+        res.status(201).send('Post created successfully');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error creating post');
+    }
+});
 
 // Routes
-app.use('/catalog', catalogRouter);
+app.use('/catalog', catalogRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
