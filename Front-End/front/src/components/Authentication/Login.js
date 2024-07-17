@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 
 const Login = () => {
@@ -17,17 +16,12 @@ const Login = () => {
         });
     };
 
-    const navigate = useNavigate();
-
-    const navigateToHome = () => {
-        navigate('/');
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/login', formData);
-            alert('Login successful');
+            window.location.reload();
+            // alert('Login successful');
             localStorage.setItem('token', response.data.token);
         } catch (error) {
             console.error('Error logging in:', error);
@@ -47,7 +41,7 @@ const Login = () => {
                     Password:
                     <input type="password" name="password" value={formData.password} onChange={handleChange} required />
                 </label>
-                <button onClick={navigateToHome} type="submit">Login</button>
+                <button type="submit">Login</button> 
             </form>
         </div>
     );

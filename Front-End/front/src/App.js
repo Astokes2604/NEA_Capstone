@@ -10,6 +10,8 @@ import ContactUs from './components/ContactUs/ContactUs';
 import AboutUs from './components/AboutUs/AboutUs';
 import SignUp from './components/Authentication/Signup';
 import Login from './components/Authentication/Login';
+import CreatePost from './components/CreatePost/CreatePost';
+import PostList from './components/PostList/PostList';
 import './App.css';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
                         <Route path="/about" element={<AboutUs />} />
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/create-post" element={<CreatePost />} />
+                        <Route path="/posts" element={<PostList />} />
                     </Routes>
                 </div>
             </CartProvider>

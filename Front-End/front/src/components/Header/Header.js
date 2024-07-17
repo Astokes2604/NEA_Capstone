@@ -31,7 +31,11 @@ const Header = () => {
                 <Link to="/about">About</Link>
                 <Link to="/contact">Contact</Link>
                 {isAuthenticated ? (
-                    <button onClick={handleLogout}>Logout</button>
+                    <>
+                        <Link to="/create-post">Create Post</Link>
+                        <Link to="/posts">Post List</Link>
+                        <button onClick={handleLogout}>Logout</button>
+                    </>
                 ) : (
                     <>
                         <Link to="/signup">Sign Up</Link>

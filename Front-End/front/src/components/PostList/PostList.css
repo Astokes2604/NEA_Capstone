@@ -1,0 +1,32 @@
+.post-list {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.post-item {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.post-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.post-item p {
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+}
