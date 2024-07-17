@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const bcrypt =  require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const catalogRouter = require('./routes/catalog');
 
@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// nodemailer configuration
+// Nodemailer configuration
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -36,7 +36,7 @@ app.post('/send-email', (req, res) => {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
-        if(error) {
+        if (error) {
             console.error('Error sending email:', error);
             return res.status(500).send(error.toString());
         }
@@ -52,9 +52,9 @@ mongoose.connect(process.env.MONGO_URI)
 
 // User Model
 const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true},
-    email: { type: String, required: true, unique: true},
-    password: { type: String, required: true, unique: true }
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -85,12 +85,13 @@ app.post('/login', async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch) {
+        if (!isMatch) {
             return res.status(400).send('Invalid credentials');
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(500).send('Error logging in user');
+        res.status(200).send({ token });
+        // console.log(user.username);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error logging in user');
@@ -98,7 +99,7 @@ app.post('/login', async (req, res) => {
 });
 
 // Routes
-app.use('/catalog', catalogRouter)
+app.use('/catalog', catalogRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
