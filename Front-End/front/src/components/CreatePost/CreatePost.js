@@ -18,25 +18,25 @@ const CreatePost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+    
         if (!description || !image) {
             setError('Please fill out all fields.');
             return;
         }
-
+    
         const formData = new FormData();
         formData.append('description', description);
         formData.append('image', image);
-
+    
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('/createpost', formData, {
+            const response = await axios.post('http://localhost:5000/createpost', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`
                 }
             });
-
+    
             if (response.status === 201) {
                 setSuccess('Post created successfully!');
                 setDescription('');
@@ -44,7 +44,7 @@ const CreatePost = () => {
                 setError('');
             }
         } catch (err) {
-            console.error(err);
+            console.error('Error creating post:', err); // Log the error
             setError('Error creating post');
         }
     };

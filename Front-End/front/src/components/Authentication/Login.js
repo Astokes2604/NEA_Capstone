@@ -21,7 +21,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:5000/login', formData);
             window.location.reload();
-            // alert('Login successful');
+            alert('Login successful');
             localStorage.setItem('token', response.data.token);
         } catch (error) {
             console.error('Error logging in:', error);
