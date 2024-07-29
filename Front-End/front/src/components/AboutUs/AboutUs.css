@@ -1,22 +1,26 @@
 .about-us {
     padding: 20px;
     text-align: center;
+    background-color: #FFFFE0;
 }
 
 .about-us h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    color: #000080;
 }
 
 .about-us h2 {
     font-size: 1.8em;
     margin-top: 20px;
+    color: #FF7F50;
 }
 
 .about-us p {
     font-size: 1.2em;
     line-height: 1.6;
-    margin: 10px 0
+    margin: 10px 0;
+    color: #555;
 }
 
 .ceo {
@@ -25,14 +29,15 @@
     justify-content: center;
     margin-bottom: 20px;
     text-align: left;
-    border: 1px solid #ccc;
+    border: 1px solid #D3D3D3;
     padding: 10px;
     transition: background-color 0.3s, box-shadow 0.3s;
     position: relative;
+    background-color: #FFFFFF;
 }
 
 .ceo:hover {
-    background-color: #f9f9f9;
+    background-color: #FF7F50;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -50,6 +55,7 @@
 .ceo h4 {
     font-size: 1.5em;
     margin-bottom: 10px;
+    color: #000080;
 }
 
 .ceo p {
@@ -59,8 +65,8 @@
 .ceo:hover p {
     display: block;
     position: absolute;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: #FFFFFF;
+    border: 1px solid #D3D3D3;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1;

@@ -4,10 +4,15 @@
     align-items: center;
     justify-content: center;
     margin: 50px;
+    background-color: #E6E6FA;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .auth-container h2 {
     margin-bottom: 20px;
+    color: #000080;
 }
 
 .auth-container form {
@@ -23,13 +28,13 @@
 .auth-container input {
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #D3D3D3;
     border-radius: 4px;
 }
 
 .auth-container button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 4px;
@@ -37,5 +42,5 @@
 }
 
 .auth-container button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }

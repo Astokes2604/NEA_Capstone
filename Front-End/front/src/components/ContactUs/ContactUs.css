@@ -1,11 +1,13 @@
 .contact-us {
     padding: 20px;
     text-align: left;
+    background-color: #E6E6FA;
 }
 
 .contact-us h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    color: #000080;
 }
 
 .contact-us .form-group {
@@ -22,37 +24,38 @@
     width: 100%;
     padding: 10px;
     font-size: 1em;
-    border: 1px solid #ddd;
+    border: 1px solid #D3D3D3;
     border-radius: 5px;
+    background-color: #FFFFFF;
 }
 
 .contact-us button {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #007bff;
-    color: white;
+    background-color: #000080;
+    color: #FFFFFF;
     border: none;
     border-radius: 5px;
 }
 
 .contact-us button:hover {
-    background-color: #0056b3;
+    background-color: #000060;
 }
 
 .social-media {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
 .social-media a {
-    color: #000;
+    color: #000080;
     margin: 0 10px;
     font-size: 2rem;
 }
 
 .social-media a:hover {
-    color: #007bff;
+    color: #FF7F50;
 }
