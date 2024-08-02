@@ -1,10 +1,24 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 import { useCart } from '../../contexts/CartContext';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
-import './Cart.css'
+import './Cart.css';
 
 const Cart = () => {
-    const { cart, clearCart, calculateTotal } = useCart();
+    const { cart, setCart, clearCart, calculateTotal } = useCart();
+
+    const handleQuantityChange = (itemId, newQuantity) => {
+        if (newQuantity < 1) return; // Ensure quantity is at least 1
+        axios.put(`http://localhost:5000/api/catalog/updateQuantity/${itemId}`, { quantity: newQuantity })
+            .then(response => {
+                const updatedItem = response.data;
+                const updatedCart = cart.map(item => 
+                    item._id === updatedItem._id ? { ...item, quantity: updatedItem.quantity } : item
+                );
+                setCart(updatedCart);
+            })
+            .catch(error => console.error('Error updating quantity:', error));
+    };
 
     const handleApprove = (orderID) => {
         console.log('Order approved:', orderID);
@@ -26,7 +40,11 @@ const Cart = () => {
                                     <h2>{item.name}</h2>
                                     <p>Color: {item.selectedColor}</p>
                                     <p>Size: {item.selectedSize}</p>
-                                    <p>Quantity: {item.quantity}</p>
+                                    <div className="quantity">
+                                        <button onClick={() => handleQuantityChange(item._id, item.quantity - 1)}>-</button>
+                                        <span>{item.quantity}</span>
+                                        <button onClick={() => handleQuantityChange(item._id, item.quantity + 1)}>+</button>
+                                    </div>
                                     <p>Price: ${(item.price * item.quantity).toFixed(2)}</p>
                                 </div>
                             </li>

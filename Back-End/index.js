@@ -10,6 +10,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const catalogRouter = require('./routes/catalog');
+const orderRoutes = require('./routes/orders');
 const Post = require('./models/Post');
 const User = require('./models/User');
 
@@ -175,6 +176,7 @@ app.get('/posts', async (req, res) => {
 
 // Routes
 app.use('/catalog', catalogRouter);
+app.use('/orders', orderRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

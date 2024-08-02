@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const item = await CatalogItem.findById(req.params.id);
-        if (item == null) {
-            return res.status(404).json({ message: 'Cannot find item' });
+        if (!item) {
+            return res.status(404).json({ message: 'Item not found' });
         }
         res.json(item);
     } catch (err) {
@@ -24,12 +24,16 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+// New route to update quantity
+router.put('/updateQuantity/:id', async (req, res) => {
     try {
         const item = await CatalogItem.findById(req.params.id);
         if (!item) {
             return res.status(404).json({ message: 'Item not found' });
         }
+
+        item.quantity = req.body.quantity;
+        await item.save();
         res.json(item);
     } catch (err) {
         res.status(500).json({ message: err.message });
