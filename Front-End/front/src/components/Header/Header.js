@@ -30,6 +30,7 @@ const Header = () => {
                 <Link to="/catalog">Catalog</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact">Contact</Link>
+                <Link to="/location-finder">Find Gyms</Link>
                 {isAuthenticated ? (
                     <>
                         <Link to="/create-post">Create Post</Link>
@@ -50,4 +51,4 @@ const Header = () => {
     );
 };
 
-export default Header
+export default Header;

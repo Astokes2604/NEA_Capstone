@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 const catalogRouter = require('./routes/catalog');
 const orderRoutes = require('./routes/orders');
 const Post = require('./models/Post');
@@ -173,6 +174,40 @@ app.get('/posts', async (req, res) => {
         res.status(500).send('Error fetching posts');
     }
 });
+
+// Route to find gyms near a zip code
+app.get('/api/gyms', async (req, res) => {
+    const { zip, radius } = req.query;
+    const apiKey = 'AIzaSyDYNBpj2XKkjwEkTmfyVf1mW-MAIfrFWVI';
+
+    console.log(`Received request to find gyms near zip: ${zip}, radius: ${radius}`);
+
+    try {
+        // Convert zip code to lat/lng
+        const geoResponse = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip}&key=${apiKey}`);
+        console.log('Geocoding response:', geoResponse.data);
+
+        if (geoResponse.data.results.length === 0) {
+            return res.status(404).send('Invalid zip code');
+        }
+
+        const location = geoResponse.data.results[0].geometry.location;
+        const { lat, lng } = location;
+
+        console.log(`Geocoded location: lat=${lat}, lng=${lng}`);
+
+        // Find gyms near the given lat/lng
+        const gymResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius * 1609.34}&type=gym&key=${apiKey}`);
+        console.log('Gyms response:', gymResponse.data);
+
+        res.json(gymResponse.data);
+    } catch (error) {
+        console.error('Error fetching gyms:', error);
+        res.status(500).send('Error fetching gyms');
+    }
+});
+
+
 
 // Routes
 app.use('/catalog', catalogRouter);

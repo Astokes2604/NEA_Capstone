@@ -37,6 +37,7 @@
 .color-button,
 .size-button {
     margin-right: 10px;
+    color: black;
     padding: 5px 10px;
     border: 1px solid #D3D3D3;
     border-radius: 5px;

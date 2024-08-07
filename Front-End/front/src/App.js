@@ -12,6 +12,7 @@ import SignUp from './components/Authentication/Signup';
 import Login from './components/Authentication/Login';
 import CreatePost from './components/CreatePost/CreatePost';
 import PostList from './components/PostList/PostList';
+import LocationFinder from './components/LocationFinder/LocationFinder';
 import './App.css';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/create-post" element={<CreatePost />} />
                         <Route path="/posts" element={<PostList />} />
+                        <Route path="/location-finder" element={<LocationFinder />} />
                     </Routes>
                 </div>
             </CartProvider>
