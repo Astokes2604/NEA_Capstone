@@ -178,7 +178,7 @@ app.get('/posts', async (req, res) => {
 // Route to find gyms near a zip code
 app.get('/api/gyms', async (req, res) => {
     const { zip, radius } = req.query;
-    const apiKey = 'AIzaSyDYNBpj2XKkjwEkTmfyVf1mW-MAIfrFWVI';
+    const apiKey = process.env.GOOGLE_API_KEY || 'AIzaSyDYNBpj2XKkjwEkTmfyVf1mW-MAIfrFWVI';
 
     console.log(`Received request to find gyms near zip: ${zip}, radius: ${radius}`);
 
@@ -198,14 +198,36 @@ app.get('/api/gyms', async (req, res) => {
 
         // Find gyms near the given lat/lng
         const gymResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius * 1609.34}&type=gym&key=${apiKey}`);
-        console.log('Gyms response:', gymResponse.data);
+        const gyms = gymResponse.data.results;
 
-        res.json(gymResponse.data);
+        // Fetch details for each gym to get hours of operation
+        const detailedGyms = await Promise.all(gyms.map(async (gym) => {
+            const detailsResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${gym.place_id}&fields=name,formatted_address,opening_hours&key=${apiKey}`);
+            const details = detailsResponse.data.result;
+
+            // Only include gyms that have opening hours data
+            if (details.opening_hours && details.opening_hours.weekday_text) {
+                return {
+                    name: details.name,
+                    address: details.formatted_address,
+                    hours: details.opening_hours.weekday_text,
+                };
+            }
+
+            return null; // Filter out gyms with no operational hours
+        }));
+
+        // Filter out any null entries resulting from gyms without operational hours
+        const operationalGyms = detailedGyms.filter(gym => gym !== null);
+
+        res.json(operationalGyms);
     } catch (error) {
         console.error('Error fetching gyms:', error);
         res.status(500).send('Error fetching gyms');
     }
 });
+
+
 
 
 

@@ -13,13 +13,7 @@ const LocationFinder = () => {
         setError('');
         try {
             const response = await axios.get(`http://localhost:5000/api/gyms?zip=${zipCode}&radius=${radius}`);
-            const data = response.data;
-            if (data.status === 'OK' && data.results) {
-                setGyms(data.results);
-            } else {
-                setError('No gyms found.');
-                setGyms([]);
-            }
+            setGyms(response.data);
         } catch (err) {
             console.error('Error fetching gyms:', err);
             setError('Error fetching gyms. Please try again.');
@@ -50,12 +44,12 @@ const LocationFinder = () => {
                 {gyms.map((gym, index) => (
                     <div key={index} className="gym">
                         <h2>{gym.name}</h2>
-                        {gym.geometry && gym.geometry.location && (
-                            <p>
-                                Location: {gym.geometry.location.lat}, {gym.geometry.location.lng}
-                            </p>
-                        )}
-                        <p>Address: {gym.vicinity}</p>
+                        <p>Address: {gym.address}</p>
+                        <ul className="gym-hours">
+                            {gym.hours.map((hour, idx) => (
+                                <li key={idx}>{hour}</li>
+                            ))}
+                        </ul>
                     </div>
                 ))}
             </div>
