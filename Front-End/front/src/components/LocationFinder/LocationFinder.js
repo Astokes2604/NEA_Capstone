@@ -32,11 +32,7 @@ const LocationFinder = () => {
                     onChange={(e) => setZipCode(e.target.value)}
                     required
                 />
-                <select value={radius} onChange={(e) => setRadius(parseInt(e.target.value))}>
-                    <option value={25}>25 miles</option>
-                    <option value={50}>50 miles</option>
-                    <option value={75}>75 miles</option>
-                </select>
+                <h3>Within 25 miles of your zip</h3>
                 <button type="submit">Submit</button>
             </form>
             {error && <p className="error">{error}</p>}

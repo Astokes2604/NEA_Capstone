@@ -196,9 +196,27 @@ app.get('/api/gyms', async (req, res) => {
 
         console.log(`Geocoded location: lat=${lat}, lng=${lng}`);
 
-        // Find gyms near the given lat/lng
-        const gymResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius * 1609.34}&type=gym&key=${apiKey}`);
-        const gyms = gymResponse.data.results;
+        let gyms = [];
+        let nextPageToken = '';
+        let keepFetching = true;
+
+        // Fetch all gym locations within the specified radius
+        while (keepFetching) {
+            const gymResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius * 1609.34}&type=gym&key=${apiKey}&pagetoken=${nextPageToken}`);
+            console.log('Gyms response:', gymResponse.data);
+
+            gyms = gyms.concat(gymResponse.data.results);
+
+            nextPageToken = gymResponse.data.next_page_token;
+
+            // If there's no next page token, stop fetching
+            if (!nextPageToken) {
+                keepFetching = false;
+            } else {
+                // Wait a bit to avoid hitting the API too quickly
+                await new Promise(resolve => setTimeout(resolve, 2000));
+            }
+        }
 
         // Fetch details for each gym to get hours of operation
         const detailedGyms = await Promise.all(gyms.map(async (gym) => {
@@ -213,13 +231,13 @@ app.get('/api/gyms', async (req, res) => {
                     hours: details.opening_hours.weekday_text,
                 };
             }
-
             return null; // Filter out gyms with no operational hours
         }));
 
         // Filter out any null entries resulting from gyms without operational hours
         const operationalGyms = detailedGyms.filter(gym => gym !== null);
 
+        console.log(`Total number of gyms: ${gyms.length}`);
         res.json(operationalGyms);
     } catch (error) {
         console.error('Error fetching gyms:', error);
