@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useCart } from '../../contexts/CartContext';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
@@ -7,9 +7,34 @@ import './Cart.css';
 const Cart = () => {
     const { cart, setCart, clearCart, calculateTotal } = useCart();
 
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const response = await axios.get('http://localhost:5000/api/cart', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    setCart(response.data.cartItems);
+                } catch (error) {
+                    console.error('Error fetching cart items:', error);
+                }
+            }
+        };
+
+        fetchCartItems();
+    }, [setCart]);
+
     const handleQuantityChange = (itemId, newQuantity) => {
-        if (newQuantity < 1) return; // Ensure quantity is at least 1
-        axios.put(`http://localhost:5000/api/catalog/updateQuantity/${itemId}`, { quantity: newQuantity })
+        if (newQuantity < 1) return;
+        const token = localStorage.getItem('token');
+        axios.put(`http://localhost:5000/api/catalog/updateQuantity/${itemId}`, { quantity: newQuantity }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
             .then(response => {
                 const updatedItem = response.data;
                 const updatedCart = cart.map(item => 

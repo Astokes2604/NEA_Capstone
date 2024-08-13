@@ -231,13 +231,15 @@ app.get('/api/gyms', async (req, res) => {
                     hours: details.opening_hours.weekday_text,
                 };
             }
+
             return null; // Filter out gyms with no operational hours
         }));
+
+        console.log(`Total gyms inside 25 miles for your zip code: ${gyms.length}`);
 
         // Filter out any null entries resulting from gyms without operational hours
         const operationalGyms = detailedGyms.filter(gym => gym !== null);
 
-        console.log(`Total number of gyms: ${gyms.length}`);
         res.json(operationalGyms);
     } catch (error) {
         console.error('Error fetching gyms:', error);
@@ -245,9 +247,68 @@ app.get('/api/gyms', async (req, res) => {
     }
 });
 
+// Middleware to authenticate the user using JWT
+const authenticate = (req, res, next) => {
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
 
+    if (!token) {
+        return res.status(401).send('Access denied. No token provided.');
+    }
 
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded; // Attach the decoded token to the request object
+        next(); // Proceed to the next middleware or route handler
+    } catch (error) {
+        res.status(400).send('Invalid token.');
+    }
+};
 
+// Cart routes
+app.get('/api/cart', authenticate, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).populate('cart.productId');
+        res.json(user.cart);
+    } catch (error) {
+        console.error('Error fetching cart:', error);
+        res.status(500).send('Error fetching cart');
+    }
+});
+
+app.post('/api/cart', authenticate, async (req, res) => {
+    const { productId, quantity } = req.body;
+
+    try {
+        const user = await User.findById(req.user._id);
+        const existingProduct = user.cart.find(item => item.productId.toString() === productId);
+
+        if (existingProduct) {
+            existingProduct.quantity += quantity;
+        } else {
+            user.cart.push({ productId, quantity });
+        }
+
+        await user.save();
+        res.status(201).send('Product added to cart');
+    } catch (error) {
+        console.error('Error adding to cart:', error);
+        res.status(500).send('Error adding to cart');
+    }
+});
+
+app.delete('/api/cart/:productId', authenticate, async (req, res) => {
+    const { productId } = req.params;
+
+    try {
+        const user = await User.findById(req.user._id);
+        user.cart = user.cart.filter(item => item.productId.toString() !== productId);
+        await user.save();
+        res.status(200).send('Product removed from cart');
+    } catch (error) {
+        console.error('Error removing from cart:', error);
+        res.status(500).send('Error removing from cart');
+    }
+});
 
 // Routes
 app.use('/catalog', catalogRouter);

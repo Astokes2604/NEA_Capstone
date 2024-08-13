@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Header.css';
 
 const Header = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
             setIsAuthenticated(true);
+            axios.get('http://localhost:5000/api/user', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(response => {
+                setUsername(response.data.username);
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
         }
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsAuthenticated(false);
+        setUsername('');
         navigate('/');
     };
 
@@ -25,6 +39,14 @@ const Header = () => {
                 <Link to="/">
                     <h1>New Era Athletics</h1>
                 </Link>
+                {isAuthenticated ? (
+                    <>
+                        <span>Welcome {username}</span>
+                    </>
+                ) : (
+                    <>
+                    </>
+                )}
             </div>
             <nav className="nav">
                 <Link to="/catalog">Catalog</Link>
