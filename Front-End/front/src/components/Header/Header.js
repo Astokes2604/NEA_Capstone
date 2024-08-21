@@ -40,12 +40,9 @@ const Header = () => {
                     <h1>New Era Athletics</h1>
                 </Link>
                 {isAuthenticated ? (
-                    <>
-                        <span>Welcome {username}</span>
-                    </>
+                    <p>Welcome, {username}</p>
                 ) : (
-                    <>
-                    </>
+                    <></>
                 )}
             </div>
             <nav className="nav">
@@ -57,7 +54,7 @@ const Header = () => {
                     <>
                         <Link to="/create-post">Create Post</Link>
                         <Link to="/posts">Post List</Link>
-                        <button onClick={handleLogout}>Logout</button>
+                        <button className="logout-button" onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
                     <>

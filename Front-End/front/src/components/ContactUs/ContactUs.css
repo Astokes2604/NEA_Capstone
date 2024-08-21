@@ -1,61 +1,81 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 .contact-us {
     padding: 20px;
-    text-align: left;
-    background-color: #E6E6FA;
+    text-align: center;
+    background-color: #2C394C;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .contact-us h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
-    color: #000080;
+    color: #63DAFC;
 }
 
 .contact-us .form-group {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contact-us label {
     display: block;
     margin-bottom: 5px;
+    color: #63DAFC;
 }
 
 .contact-us input,
 .contact-us textarea {
-    width: 100%;
+    width: 80%;
+    max-width: 500px;
     padding: 10px;
     font-size: 1em;
-    border: 1px solid #D3D3D3;
+    border: 1px solid #908388;
     border-radius: 5px;
-    background-color: #FFFFFF;
+    background-color: #020008;
+    color: #63DAFC;
+    box-sizing: border-box;
+}
+
+.contact-us textarea {
+    height: 100px;
+    resize: vertical;
+    overflow: auto;
 }
 
 .contact-us button {
     padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #000080;
-    color: #FFFFFF;
     border: none;
     border-radius: 5px;
+    background-color: #5B3F3A;
+    color: #63DAFC;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .contact-us button:hover {
-    background-color: #000060;
+    background-color: #1D719D;
 }
 
 .social-media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 20px;
 }
 
 .social-media a {
-    color: #000080;
+    color: #63DAFC;
     margin: 0 10px;
-    font-size: 2rem;
+    font-size: 24px;
+    text-decoration: none;
 }
 
 .social-media a:hover {
-    color: #FF7F50;
+    color: #1D719D;
 }

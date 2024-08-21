@@ -74,6 +74,7 @@ const Cart = () => {
                                 </div>
                             </li>
                         ))}
+                        <button onClick={clearCart} className="clear-cart-button">Clear Cart</button>
                     </ul>
                     <div className="cart-total">
                         <h2>Total: ${calculateTotal()}</h2>
@@ -98,7 +99,6 @@ const Cart = () => {
                             }}
                         />
                     </PayPalScriptProvider>
-                    <button onClick={clearCart} className="clear-cart-button">Clear Cart</button>
                 </>
             )}
         </div>

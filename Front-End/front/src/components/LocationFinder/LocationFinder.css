@@ -1,17 +1,25 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 .location-finder {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #E6E6FA;
+    justify-content: center;
     padding: 20px;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #2C394C;
+    color: #63DAFC;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .location-finder h1 {
-    color: #000080;
+    font-size: 2.5em;
     margin-bottom: 20px;
+    color: #63DAFC;
 }
 
 .location-finder form {
@@ -20,49 +28,47 @@
     align-items: center;
 }
 
-.location-finder input,
-.location-finder select,
-.location-finder button {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
 .location-finder input {
-    background-color: #FFFFFF;
-}
-
-.location-finder select {
-    background-color: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #63DAFC;
+    color: #2C394C;
 }
 
 .location-finder button {
-    background-color: #28a745;
-    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: none;
+    background-color: #63DAFC;
+    color: #2C394C;
     cursor: pointer;
 }
 
-.location-finder button:hover {
-    background-color: #218838;
-}
-
-.gym-list {
-    margin-top: 20px;
+.location-finder .map {
     width: 100%;
-}
-
-.gym-list ul {
-    list-style: none;
-    padding: 0;
-}
-
-.gym-list li {
-    background-color: #FFFFFF;
-    border: 1px solid #D3D3D3;
+    height: 500px;
     border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.location-finder .location-info {
+    margin-top: 20px;
+}
+
+.location-finder .location-info p {
+    font-size: 1.2em;
+    color: #908388;
+}
+
+.location-finder .location-info .address {
+    font-size: 1.5em;
+    color: #1D719D;
+    margin-top: 10px;
+}
+
+.error {
+    color: #FF6F6F;
 }

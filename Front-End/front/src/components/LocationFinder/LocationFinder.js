@@ -4,7 +4,7 @@ import './LocationFinder.css';
 
 const LocationFinder = () => {
     const [zipCode, setZipCode] = useState('');
-    const [radius, setRadius] = useState(25);
+    const radius = 25;
     const [gyms, setGyms] = useState([]);
     const [error, setError] = useState('');
 

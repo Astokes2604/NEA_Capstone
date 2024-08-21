@@ -1,65 +1,94 @@
 .item-details {
     display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    background-color: #E6E6FA;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #2C394C;
+    color: #63DAFC;
+    text-align: center;
+    flex-wrap: wrap;
 }
 
-.item-image {
-    width: 50%;
-    max-width: 400px;
-    margin-right: 20px;
+.item-details .item-image {
+    max-width: 40vw;
+    height: auto;
     border-radius: 5px;
-}
-
-.item-info {
+    margin-right: 30px;
+    margin-top: 20px;
+    position: relative;
+    top: 20px;
+    left: 125px;
     flex: 1;
 }
 
-.item-price {
-    font-size: 24px;
-    color: #FFD700;
-    margin-bottom: 15px;
+.item-details .item-info {
+    max-width: 50vw;
+    margin: 0 auto;
+    text-align: left;
 }
 
-.item-options {
+.item-details h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #63DAFC;
+}
+
+.item-details .item-info h2 {
+    font-size: 2em;
+    color: #1D719D;
+}
+
+.item-details .item-info p {
+    font-size: 1.2em;
+    color: #908388;
+}
+
+.item-details .item-info .price {
+    font-size: 1.5em;
+    color: #5B3F3A;
+    margin-top: 10px;
+}
+
+.item-details button {
+    padding: 10px 20px;
+    background-color: #5B3F3A;
+    color: #63DAFC;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
     margin-top: 20px;
 }
 
-.item-colors,
-.itemsizes,
+.item-details button:hover {
+    background-color: #1D719D;
+}
+
+.item-options {
+    text-align: left;
+}
+
+.item-colors, .item-sizes {
+    margin-top: 10px;
+}
+
+.color-button, .size-button {
+    border: 1px solid #5B3F3A;
+    background-color: #2C394C;
+    color: #63DAFC;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.color-button.selected, .size-button.selected {
+    border: 2px solid #1D719D;
+    background-color: #1D719D;
+    color: #ffffff;
+}
+
 .item-quantity {
-    margin-bottom: 15px;
-}
-
-.color-button,
-.size-button {
-    margin-right: 10px;
-    color: black;
-    padding: 5px 10px;
-    border: 1px solid #D3D3D3;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    cursor: pointer;
-}
-
-.color-button.selected,
-.size-button.selected {
-    background-color: #D3D3D3;
-}
-
-.add-to-cart-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.add-to-cart-button:hover {
-    background-color: #218838;
+    margin-top: 10px;
 }

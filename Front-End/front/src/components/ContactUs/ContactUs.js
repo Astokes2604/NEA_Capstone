@@ -45,7 +45,7 @@ const ContactUs = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Email</label>
                     <input
                         type="email"
@@ -55,7 +55,7 @@ const ContactUs = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Message</label>
                     <textarea
                         name="message"

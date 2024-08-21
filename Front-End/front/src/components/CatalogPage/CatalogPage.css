@@ -4,12 +4,12 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    background-color: #FFFFE0;
+    background-color: #2C394C;
 }
 
 .catalog-item {
-    background: #FFFFFF;
-    border: 1px solid #D3D3D3;
+    background: #63DAFC;
+    border: 1px solid #908388;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -37,11 +37,11 @@
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
-    color: #000080;
+    color: #020008;
 }
 
 .catalog-item-price {
     font-size: 16px;
-    color: #FF7F50;
+    color: #5B3F3A;
     margin-bottom: 15px;
 }

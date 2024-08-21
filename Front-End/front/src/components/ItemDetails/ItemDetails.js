@@ -40,7 +40,7 @@ const ItemDetails = () => {
             <img src={item.image} alt={item.name} className="item-image" />
             <div className="item-info">
                 <h1>{item.name}</h1>
-                <p className="item-price">${item.price.toFixed(2)}</p>
+                <p className="price">${item.price.toFixed(2)}</p>
                 <div className="item-options">
                     <div className="item-colors">
                         <label>Color:</label>
