@@ -44,7 +44,7 @@ const CreatePost = () => {
                 setError('');
             }
         } catch (err) {
-            console.error('Error creating post:', err); // Log the error
+            console.error('Error creating post:', err);
             setError('Error creating post');
         }
     };

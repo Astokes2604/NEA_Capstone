@@ -57,3 +57,17 @@
 .create-post-container button:hover {
     background-color: #1D719D;
 }
+
+.create-post-container .error {
+    color: #D9534F;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.create-post-container .success {
+    color: #5BC0DE;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+}
