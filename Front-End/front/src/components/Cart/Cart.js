@@ -66,9 +66,9 @@ const Cart = () => {
                                     <p>Color: {item.selectedColor}</p>
                                     <p>Size: {item.selectedSize}</p>
                                     <div className="quantity">
-                                        <button onClick={() => handleQuantityChange(item._id, item.quantity - 1)}>-</button>
+                                        {/* <button onClick={() => handleQuantityChange(item._id, item.quantity - 1)}>-</button> */}
                                         <span>{item.quantity}</span>
-                                        <button onClick={() => handleQuantityChange(item._id, item.quantity + 1)}>+</button>
+                                        {/* <button onClick={() => handleQuantityChange(item._id, item.quantity + 1)}>+</button> */}
                                     </div>
                                     <p>Price: ${(item.price * item.quantity).toFixed(2)}</p>
                                 </div>

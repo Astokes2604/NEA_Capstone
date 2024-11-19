@@ -28,7 +28,7 @@ html, body {
     font-size: 1.2em;
     line-height: 1.6;
     margin: 10px 0;
-    color: #908388;
+    color: #63DAFC;
 }
 
 .ceo {
@@ -81,4 +81,8 @@ html, body {
     left: 50%;
     transform: translateX(-50%);
     bottom: -50px;
+}
+
+.instagram {
+    color: #63DAFC;
 }

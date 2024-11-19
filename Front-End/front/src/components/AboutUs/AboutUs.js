@@ -31,7 +31,7 @@ const AboutUs = () => {
                     </p>
                 </div>
             </div>
-            <a href="https://www.instagram.com/stokesa_workout/" target="_blank" rel="noopener noreferrer"><FaInstagram /> | stokesa_workout</a>
+            <a className="instagram" href="https://www.instagram.com/stokesa_workout/" target="_blank" rel="noopener noreferrer"><FaInstagram /> | stokesa_workout</a>
             <div className="ceo">
                 <img src="../../images/ColeTasso.jpg" alt="Cole Tasso" className="ceo-image" />
                 <div>
@@ -47,8 +47,8 @@ const AboutUs = () => {
                     </p>
                 </div>
             </div>
-            <a href="https://www.instagram.com/colexfit/" target="_blank" rel="noopener noreferrer"><FaInstagram /> | colexfit</a>
-            <h2><Link to="/contact">Contact Us</Link></h2>
+            <a className="instagram" href="https://www.instagram.com/colexfit/" target="_blank" rel="noopener noreferrer"><FaInstagram /> | colexfit</a>
+            <h2><Link className="instagram" to="/contact">Contact Us</Link></h2>
         </div>
     )
 }

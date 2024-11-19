@@ -14,9 +14,9 @@ const Home = () => {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            .catch(error => {
-                console.error('Error fetching user data:', error);
-            });
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                });
         }
     }, []);
 
@@ -25,11 +25,11 @@ const Home = () => {
             <div className="hero-section">
                 <h1>Welcome to New Era Athletics</h1>
                 <p>
-                    The start of a New Era is about to begin. Weightlifting, Bodybuilding, Power Lifting, 
-                    you name it in the fitness industry is coming into a new era and is making a shift 
-                    that will change how the world views all of fitness. New Era Athletics is here for the 
-                    change of era's and is showcasing the New Era by bringing it from tomorrow to today 
-                    for the world. It is time to stop denying that the future is here and to welcome THE 
+                    The start of a New Era is about to begin. Weightlifting, Bodybuilding, Power Lifting,
+                    you name it in the fitness industry is coming into a new era and is making a shift
+                    that will change how the world views all of fitness. New Era Athletics is here for the
+                    change of era's and is showcasing the New Era by bringing it from tomorrow to today
+                    for the world. It is time to stop denying that the future is here and to welcome THE
                     NEW ERA OF ATHLETICS!
                 </p>
                 <a href="#features" className="cta-button">Explore Features</a>
@@ -55,11 +55,13 @@ const Home = () => {
                     <p>Have questions or need support? Get in touch with us.</p>
                     <a href="/contact">Contact Us</a>
                 </div>
-                <div className="feature">
-                    <h2>Sign Up</h2>
-                    <p>Join our community and start your fitness journey today.</p>
-                    <a href="/signup">Sign Up</a>
-                </div>
+                {!loggedIn && (
+                    <div className="feature">
+                        <h2>Sign Up</h2>
+                        <p>Join our community and start your fitness journey today.</p>
+                        <a href="/signup">Sign Up</a>
+                    </div>
+                )}
                 {!loggedIn && (
                     <div className="feature">
                         <h2>Login</h2>

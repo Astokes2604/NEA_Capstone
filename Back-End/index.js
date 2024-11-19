@@ -198,7 +198,7 @@ app.post('/createpost', upload.single('image'), async (req, res) => {
 // Fetch Posts route
 app.get('/posts', async (req, res) => {
     try {
-        const posts = await Post.find();
+        const posts = await Post.find().sort({ createdAt: -1 });
         res.status(200).json(posts);
     } catch (error) {
         console.error('Error fetching posts:', error);
